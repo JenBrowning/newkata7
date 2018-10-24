@@ -2,90 +2,90 @@
 function forEach(array, callBackFunction) {
     for (let x = 0; x < array.length; x++) {
         const currentValue = array[x];
-        callBackFunction(currentValue, x, array);
+        callBackFunction(currentValue, array);
     }
   
 }
-
+const lowerCaseLetters = ['a', 'b', 'c', 'd', 'e']
+forEach(lowerCaseLetters, function(letter) {
+    let letterUpperCase = letter.toUpperCase()
+    console.log(letterUpperCase)
+})
+//array.prototype.map in mdn on google
 
 //Katas2 map()
-function map(array, x, callBackFunction) {
+const numbers = [1,2,3,4,5]
+function map(array, callBackFunction) {
+    let result = [];
     for (let x = 0; x < array.length; x++) {
-        const newArray = array[x];
-        callBackFunction(newArray, x, array);
+        result = callBackFunction(array[x]);
     }
+    return result;
 }
+console.log(map(numbers, x => x * 2))
 
 
 
 //Katas3 some()
-function some(array, x, callBackFunction) {
+function some(array, callBackFunction) {
+    let result = false;
     for (let x = 0; x < array.length; x++) {
-        const arrayCheck = array[x];
-        if (arrayCheck === array[x]) {
-            return true;
+        if(callBackFunction(array[x]) === true) {
+            result = true;
         }
-        else if (arrayCheck !== array[x]) {
-            return false;
-        }
-        callBackFunction(arrayCheck, x, array);
-    }
+    } return result;
 }
+console.log(some(numbers, x => x % 2 ===0));
+
 
 
 //Katas4 find()
-function find(array, x, callBackFunction) {
+function find(array, callBackFunction) {
     for (let x = 0; x < array.length; x++) {
-        const arrayFind = array[x];
-        if (arrayFind[x] === array[x]) {
-            return arrayFind;
-        }
-
-        else if (arrayFind !== array[x]) {
-            return "undefined";
-        }
+       if(callBackFunction(array[x]) === true){
+           return array[x];
+       }
     }
-    callBackFunction(arrayFind, x, array);
 }
+console.log(find(numbers, x => x > 2));
+
 
 
 //Katas5 findIndex()
 function findIndex(array, callBackFunction) {
     for (let x = 0; x < array.length; x++) {
-        const arrayIndex = array[x];
-        if (arrayIndex[x] === array[x]) {
-            return arrayIndex[x]
-        }
-        else if (arrayFind !== array[x]) {
-            return -1;
+        if (callBackFunction(array[x]) === true) {
+            return x;
         }
     }
-    callBackFunction(arrayIndex, x, array)
+    return -1;
 }
+console.log(findIndex(lowerCaseLetters, x => x =='d'))
+    
+
 
 
 //Katas6 every()
 function every(array, callBackFunction) {
+    let result = true;
     for (let x = 0; x < array.length; x++) {
-        const arrayEvery = array[x];
-        if (arrayEvery === array) {
-            return true;
+        if(callBackFunction(array[x]) === false) {
+            result = false;
+        
         }
-        else if (arrayEvery !== array[x]) {
-            return false;
-        }
-    }
-    callBackFunction(arrayEvery, x, array)
+    }return result;
 }
+console.log(every(numbers, x => x < 8));
 
 
 //Katas7 filter()
-function filter (array, callBackFunction){
+function filter(array, callBackFunction){
     let result = [];
-    for (let i = 0; i < array.length; i++){
-        if (callBackFunction(array[i]) === true){
-            result.push(array[i])
+    for (let x = 0; x < array.length; x++){
+        if (callBackFunction(array[x]) === true){
+            result.push(array[x])
         }
     }
     return result;
 }
+console.log(filter(numbers, x => x > 4));
